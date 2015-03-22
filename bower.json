@@ -1,0 +1,29 @@
+{
+  "name": "chatapp",
+  "version": "0.1.0",
+  "homepage": "https://github.com/kasperstorgaard/chatapp",
+  "authors": [
+    "kasperstorgaard <kst@codehouse.com>"
+  ],
+  "description": "a chat app in angular using functional style ",
+  "main": "js/app.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "angular",
+    "webpack",
+    "functional",
+    "programming",
+    "ramda"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.2"
+  }
+}
