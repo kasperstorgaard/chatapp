@@ -13,4 +13,4 @@ Dev:
 Build:
 - run "npm run build"
 
-server for both Dev and Build is localhost:3000
+server for both Dev and Build is localhost:8080
