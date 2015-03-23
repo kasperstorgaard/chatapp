@@ -1,13 +1,13 @@
 var R = require('ramda');
 
-module.exports = function($scope, $log, $timeout){
-    $scope.test = 'view1-test';
+module.exports = function($scope, $log){
+  $scope.test = 'reader-test';
 
-    $scope.searchPhrase = {};
+  $scope.searchPhrase = {};
 
-    var logValue = function logValue(value) {
+  var logValue = function logValue(value) {
 		$log.log(value);
-	}
+	};
 
 	var mount = R.once(function() {
 		$scope.searchPhrase.stream

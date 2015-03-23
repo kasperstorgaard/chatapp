@@ -21,7 +21,7 @@ module.exports = function(config){
     files: [
       '../node_modules/angular/angular.min.js',
       '../node_modules/angular-mocks/angular-mocks.js',
-      '**/*.spec.js'
+      '**/*.spec.coffee'
     ],
     logLevel: config.LOG_INFO,
     plugins : [
@@ -32,7 +32,7 @@ module.exports = function(config){
     ],
     port: 9876,
     preprocessors: {
-      '**/*.spec.js': ['webpack']
+      '**/*.spec.coffee': ['webpack']
     },
     reporters: ['progress'],
     webpack: karmaWebpack

@@ -1,8 +1,5 @@
 module.exports = function(app){
-  app.config(function($routeProvider) {
-    $routeProvider.
-      otherwise({
-        redirectTo: '/view1'
-      });
+  app.config(function($urlRouterProvider) {
+    $urlRouterProvider.otherwise("/console");
   });
 }

@@ -6,10 +6,10 @@ var angular = require('angular');
 
 //initialize
 var app = angular.module('app', [
-  require('angular-route'),
+  require('angular-ui-router'),
   require('./shared').name,
-  require('./modules/view1').name,
-  require('./modules/view2').name
+  require('./modules/console').name,
+  require('./modules/reader').name
 ]);
 
 require('./app.routes.js')(app);

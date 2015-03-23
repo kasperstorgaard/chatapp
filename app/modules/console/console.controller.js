@@ -5,6 +5,7 @@ module.exports = function($scope){
 	var socket = io('http://localhost:3030');
 
 	$scope.input = {};
+	$scope.test = 'console-test';
 
 	var emit = R.curry(function(key, data){
 	  socket.emit(key, JSON.stringify(data));

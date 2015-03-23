@@ -22,8 +22,6 @@ var log = function(obj){
 
 var safeGet = R.curry(function(x,o){ return Maybe(o[x]) });
 
-var pluck = R.curry(function(x, o) { return o[x]; });
-
 module.exports = {
   log: log,
   safeGet: safeGet
