@@ -20,6 +20,3 @@ describe 'app.feed module', ->
     describe 'intial', ->
       it 'should exist', ->
         expect(controller).to.not.be.undefined
-
-      it 'should modify the scope', ->
-        expect(scope.test).to.equal 'feed-test'

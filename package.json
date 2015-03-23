@@ -31,7 +31,6 @@
     "angular": "^1.3.14",
     "angular-ui-router": "^0.2.13",
     "baconjs": "^0.7.53",
-    "express": "^4.12.3",
     "key-path": "^0.3.2",
     "ramda": "^0.11.0",
     "socket.io": "^1.3.5",
