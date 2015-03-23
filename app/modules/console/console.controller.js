@@ -2,27 +2,21 @@ var io = require('socket.io-client');
 var R = require('ramda');
 
 module.exports = function($scope){
-	var socket = io('http://localhost:3030');
-
-	$scope.input = {};
-	$scope.test = 'console-test';
-
-	var emit = R.curry(function(key, data){
-	  socket.emit(key, JSON.stringify(data));
+	var emit = R.curry(function(key, instance, data){
+	  instance.emit(key, JSON.stringify(data));
 	});
 
-	var targetValue = function(event) {
-		return event.target.value;
+	var clear = function(obj, key){
+		return function(){
+			obj[key] = '';
+		}
 	};
 
-	var mount = R.once(function() {
-		$scope.input.stream
-			.onValue(R.compose(emit('message'), targetValue));
-	});
+	var clearInput = clear($scope, 'input');
 
-	$scope.$watch('searchPhase', mount);
-
-	socket.on('message', function(data) {
-		console.log(data)
-	});
+	//-----------------------//
+	var socket = io('http://localhost:3030');
+	clearInput();
+	$scope.$watch('input', emit('typing', socket));
+	$scope.submit = R.compose(clearInput, emit('message', socket));
 };

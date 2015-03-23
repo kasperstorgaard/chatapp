@@ -9,7 +9,7 @@ var app = angular.module('app', [
   require('angular-ui-router'),
   require('./shared').name,
   require('./modules/console').name,
-  require('./modules/reader').name
+  require('./modules/feed').name
 ]);
 
 require('./app.routes.js')(app);
