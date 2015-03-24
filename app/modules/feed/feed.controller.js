@@ -5,11 +5,6 @@ module.exports = function($scope, Socket){
     list.push(message);
   });
 
-  var log = function(){
-    console.log(arguments);
-    return arguments;
-  }
-
   //----------------//
   $scope.messages = [];
   var addMessage = function(msg){

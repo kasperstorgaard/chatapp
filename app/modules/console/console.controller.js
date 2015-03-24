@@ -9,8 +9,12 @@ module.exports = function($scope, Socket){
 
   var clearInput = clear('input', $scope);
 
+  var dataObj = function(val){
+    return {data: val};
+  };
+
   //-----------------------//
   clearInput();
-  $scope.$watch('input', Socket.emit('typing'));
-  $scope.submit = R.compose(clearInput, Socket.emit('message'));
+  $scope.$watch('input', R.compose(Socket.emit('typing'), dataObj));
+  $scope.submit = R.compose(clearInput, Socket.emit('message'), dataObj);
 };

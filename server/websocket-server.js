@@ -2,26 +2,41 @@ var Server = require('socket.io');
 var Bacon = require('baconjs');
 var R = require('ramda');
 
-var io = new Server();
+var UserStore = require('./stores/user-store.js');
+var MessageStore = require('./stores/message-store.js');
 
-var originObj = R.curry(function(origin, data){
-  return {originId: origin.id, data: data};
+var ensureObj = function(val){
+  return typeof val === 'string'
+    ? JSON.parse(val)
+    : val;
+}
+
+var decorateObj = R.curry(function(key, value, obj){
+  if(obj && value){
+    obj[key] = value;
+  }
+  return obj;
 });
 
-var binder = R.curry(function(eventKey, obj, callback) {
-  obj.on(eventKey, callback);
+var bindOne = R.curry(function(eventKey, obj, sink) {
+  obj.on(eventKey, R.compose(sink, decorateObj('id', obj.id), decorateObj('type', eventKey), ensureObj));
 });
 
-var emit = R.curry(function(eventKey, obj, data){
-  obj.emit(eventKey, JSON.stringify(data));
+var binder = R.curry(function(eventKeys, obj, sink) {
+  R.forEach(R.partialRight(bindOne, obj, sink), eventKeys);
 });
 
-var connections = Bacon.fromBinder(binder('connection', io));
-
-var messages = connections.flatMap(function(socket) {
-  return Bacon.fromBinder(binder('message', socket), R.compose(originObj(socket), JSON.parse));
+var subStream = R.curry(function(eventKeys, stream){
+  return stream.flatMap(function(instance) {
+    return Bacon.fromBinder(binder(eventKeys, instance));
+  });
 });
 
 //kickoff
-messages.onValue(emit('message', io));
-io.listen(3030);
+var server = new Server();
+var connections = Bacon.fromBinder(binder(['connection', 'disconnect'], server));
+
+UserStore.kickoff(server, connections);
+MessageStore.kickoff(server, subStream(['message'], connections));
+
+server.listen(3030);
