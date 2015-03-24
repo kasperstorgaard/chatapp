@@ -1,13 +1,8 @@
 expect = chai.expect
 
-view1Controller = require './console.controller.js'
-
-describe 'app.console module', ->
+describe 'app.modules.console', ->
   beforeEach ->
-    angular.module 'app.console', []
-      .controller 'ConsoleController', view1Controller
-
-    angular.mock.module 'app.console'
+    angular.mock.module (require './index.js').name
 
   describe 'controller', ->
     controller = null
@@ -15,7 +10,7 @@ describe 'app.console module', ->
 
     beforeEach inject ($controller, $rootScope) ->
       scope = $rootScope.$new()
-      controller = $controller 'ConsoleController', { $scope: scope }
+      controller = $controller('ConsoleController', { $scope: scope })
 
     describe 'intial', ->
       it 'should exist', ->

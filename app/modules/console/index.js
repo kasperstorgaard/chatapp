@@ -1,11 +1,17 @@
 var angular = require('angular');
 
-var app = angular.module('app.console', [
-	require('../../shared').name,
-    require('angular-ui-router')
+require('./console.tpl.html');
+require('./console.less');
+
+module.exports = angular.module('app.modules.console', [
+	  require('../../shared/services/socket').name
   ])
-  .controller('ConsoleController', require('./console.controller.js'));
-
-require('./console.routes.js')(app);
-
-module.exports = app;
+  .controller('ConsoleController', require('./console.controller.js'))
+  .directive('console', function(){
+    return {
+      restrict: 'EA',
+      replace: true,
+      controller: 'ConsoleController',
+      templateUrl: 'console.tpl.html'
+    };
+  });

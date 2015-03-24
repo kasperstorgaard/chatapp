@@ -1,5 +1,3 @@
-module.exports = function(app){
-  app.config(function($urlRouterProvider) {
-    $urlRouterProvider.otherwise("/console");
-  });
+module.exports = function($urlRouterProvider){
+  $urlRouterProvider.otherwise('/home');
 }

@@ -1,13 +1,8 @@
 expect = chai.expect
 
-view1Controller = require './feed.controller.js'
-
 describe 'app.feed module', ->
   beforeEach ->
-    angular.module 'app.feed', []
-      .controller 'FeedController', view1Controller
-
-    angular.mock.module 'app.feed'
+    angular.mock.module (require './index.js').name
 
   describe 'controller', ->
     controller = null
